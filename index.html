@@ -1,63 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>สุ่มชื่อเกม</title>
-</head>
-<body style="background:black;color:#00ffcc;text-align:center;padding-top:80px;">
+  <meta charset="UTF-8">
+  <title>สุ่มชื่อ</title>
 
-  <h1>🎮 สุ่มชื่อเกมขั้นเทพ</h1>
-
-  <input id="nameInput" placeholder="ใส่ชื่อของคุณ">
-  <br><br>
-
-  <select id="mode">
-    <option value="pro">🎮 โปร</option>
-    <option value="dark">😈 โหด</option>
-    <option value="cute">💖 น่ารัก</option>
-  </select>
-
-  <br><br>
-
-  <button onclick="gen()">สุ่มชื่อ</button>
-  <button onclick="copyName()">คัดลอก</button>
-
-  <h2 id="result"></h2>
-
-  <script>
-    let special = ["×","々","ツ","么","★","๖","乂","彡","✿"];
-
-    let modes = {
-      pro: {
-        prefix: ["Pro","King","Legend","Sniper","เทพ","Master"],
-        suffix: ["99","X","Pro","007","VIP","No1"]
-      },
-      dark: {
-        prefix: ["Dark","Ghost","Devil","Shadow","Demon","Kill"],
-        suffix: ["X","Z","Kill","666","Dead","Blood"]
-      },
-      cute: {
-        prefix: ["Pinky","Baby","Sweet","Lovely","Mini","Neko"],
-        suffix: ["UwU","123","Cutie","Love","Meow","XD"]
-      }
-    };
-
-    function gen() {
-      let name = document.getElementById("nameInput").value || "Player";
-      let mode = document.getElementById("mode").value;
-
-      let p = modes[mode].prefix[Math.floor(Math.random() * modes[mode].prefix.length)];
-      let s = modes[mode].suffix[Math.floor(Math.random() * modes[mode].suffix.length)];
-      let sp = special[Math.floor(Math.random() * special.length)];
-
-      let finalName = p + sp + name + sp + s;
-
-      document.getElementById("result").innerText = finalName;
+  <style>
+    body {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      text-align: center;
+      font-family: Arial;
+      color: white;
+      padding-top: 50px;
     }
 
-    function copyName() {
-      let text = document.getElementById("result").innerText;
-      navigator.clipboard.writeText(text);
-      alert("คัดลอกแล้ว!");
+    button {
+      font-size: 20px;
+      padding: 15px 25px;
+      width: 90%;
+      max-width: 300px;
+      border: none;
+      border-radius: 12px;
+      background: #ffcc00;
+      font-weight: bold;
+    }
+
+    select {
+      font-size: 18px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <select id="category">
+    <option value="cool">เท่</option>
+    <option value="funny">ฮา</option>
+    <option value="english">อังกฤษ</option>
+  </select>
+
+  <br>
+
+  <button onclick="randomName()">สุ่มชื่อ</button>
+
+  <p id="result">---</p>
+
+  <audio id="sound" src="click.mp3"></audio>
+
+  <script>
+    const names = {
+      cool: ["Shadow", "Xero", "DarkBoy"],
+      funny: ["อ้วนจัง", "หล่อไม่ไหว", "แมวขโมยข้าว"],
+      english: ["Mike", "John", "Alex"]
+    };
+
+    function randomName() {
+      const cat = document.getElementById("category").value;
+      const list = names[cat];
+
+      const name = list[Math.floor(Math.random() * list.length)];
+      document.getElementById("result").innerText = name;
+
+      document.getElementById("sound").play();
     }
   </script>
 
