@@ -1,43 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>สุ่มชื่อ</title>
+<meta charset="UTF-8">
+<title>สุ่มชื่อโปร</title>
 
-  <style>
-    body {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      text-align: center;
-      font-family: Arial;
-      color: white;
-      padding-top: 50px;
-    }
+<style>
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: Arial;
+  text-align: center;
+  color: white;
+  padding-top: 60px;
+}
 
-    button {
-      font-size: 20px;
-      padding: 15px 25px;
-      width: 90%;
-      max-width: 300px;
-      border: none;
-      border-radius: 12px;
-      background: #ffcc00;
-      font-weight: bold;
-    }
+.box {
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  margin: auto;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
 
-    select {
-      font-size: 18px;
-      padding: 10px;
-      margin-bottom: 20px;
-    }
+button {
+  font-size: 18px;
+  padding: 15px;
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  background: #00c6ff;
+  color: white;
+  font-weight: bold;
+}
 
-    p {
-      font-size: 24px;
-      margin-top: 20px;
-    }
-  </style>
+#result {
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+.copy {
+  background: #ffcc00;
+  color: black;
+}
+</style>
 </head>
 
 <body>
+
+<div class="box">
+
+  <h2>🎲 สุ่มชื่อ</h2>
 
   <select id="category">
     <option value="cool">เท่</option>
@@ -45,31 +59,51 @@
     <option value="english">อังกฤษ</option>
   </select>
 
-  <br>
+  <div id="result">---</div>
 
   <button onclick="randomName()">สุ่มชื่อ</button>
+  <button class="copy" onclick="copyName()">📋 คัดลอกชื่อ</button>
 
-  <p id="result">---</p>
+</div>
 
-  <audio id="sound" src="click.mp3"></audio>
+<audio id="sound" src="click.mp3"></audio>
 
-  <script>
-    const names = {
-      cool: ["Shadow", "Xero", "DarkBoy"],
-      funny: ["อ้วนจัง", "หล่อไม่ไหว", "แมวขโมยข้าว"],
-      english: ["Mike", "John", "Alex"]
-    };
+<script>
+const names = {
+  cool: [
+    "ShadowX", "DarkWolf", "ZeroX", "NightBlade", "XeroKing",
+    "GhostPro", "VoidHunter", "IceReaper", "BlackNova", "StormX"
+  ],
+  funny: [
+    "อ้วนจัง", "หล่อไม่ไหว", "แมวขโมยข้าว", "ลื่นล้มทุกวัน",
+    "กินนอนเล่น", "เด็กติดเกม", "หัวร้อนง่าย", "สายฟรี"
+  ],
+  english: [
+    "Alex", "Mike", "John", "Neo", "Chris",
+    "David", "Ryan", "Leo", "Max", "Ethan"
+  ]
+};
 
-    function randomName() {
-      const cat = document.getElementById("category").value;
-      const list = names[cat];
+let lastName = "";
 
-      const name = list[Math.floor(Math.random() * list.length)];
-      document.getElementById("result").innerText = name;
+function randomName() {
+  const cat = document.getElementById("category").value;
+  const list = names[cat];
 
-      document.getElementById("sound").play();
-    }
-  </script>
+  const name = list[Math.floor(Math.random() * list.length)];
+  lastName = name;
+
+  document.getElementById("result").innerText = name;
+  document.getElementById("sound").play();
+}
+
+function copyName() {
+  if (!lastName) return;
+
+  navigator.clipboard.writeText(lastName);
+  alert("คัดลอกแล้ว: " + lastName);
+}
+</script>
 
 </body>
 </html>
