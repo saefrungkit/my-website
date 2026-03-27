@@ -3,28 +3,50 @@
 <head>
   <title>สุ่มชื่อเกม</title>
 </head>
-<body style="background:black;color:#00ffcc;text-align:center;padding-top:100px;">
+<body style="background:black;color:#00ffcc;text-align:center;padding-top:80px;">
 
-  <h1>🎮 สุ่มชื่อเกมโคตรเท่</h1>
+  <h1>🎮 สุ่มชื่อเกมขั้นเทพ</h1>
 
   <input id="nameInput" placeholder="ใส่ชื่อของคุณ">
   <br><br>
 
-  <button onclick="gen()">สุ่ม</button>
+  <select id="mode">
+    <option value="pro">🎮 โปร</option>
+    <option value="dark">😈 โหด</option>
+    <option value="cute">💖 น่ารัก</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="gen()">สุ่มชื่อ</button>
   <button onclick="copyName()">คัดลอก</button>
 
   <h2 id="result"></h2>
 
   <script>
-    let prefix = ["AS", "Dark", "X", "Z", "Ghost", "Shadow"];
-    let suffix = ["99", "X", "Z", "Kill", "XD", "Pro"];
-    let special = ["×","々","ツ","么","★","๖"];
+    let special = ["×","々","ツ","么","★","๖","乂","彡","✿"];
+
+    let modes = {
+      pro: {
+        prefix: ["Pro","King","Legend","Sniper","เทพ","Master"],
+        suffix: ["99","X","Pro","007","VIP","No1"]
+      },
+      dark: {
+        prefix: ["Dark","Ghost","Devil","Shadow","Demon","Kill"],
+        suffix: ["X","Z","Kill","666","Dead","Blood"]
+      },
+      cute: {
+        prefix: ["Pinky","Baby","Sweet","Lovely","Mini","Neko"],
+        suffix: ["UwU","123","Cutie","Love","Meow","XD"]
+      }
+    };
 
     function gen() {
       let name = document.getElementById("nameInput").value || "Player";
+      let mode = document.getElementById("mode").value;
 
-      let p = prefix[Math.floor(Math.random() * prefix.length)];
-      let s = suffix[Math.floor(Math.random() * suffix.length)];
+      let p = modes[mode].prefix[Math.floor(Math.random() * modes[mode].prefix.length)];
+      let s = modes[mode].suffix[Math.floor(Math.random() * modes[mode].suffix.length)];
       let sp = special[Math.floor(Math.random() * special.length)];
 
       let finalName = p + sp + name + sp + s;
